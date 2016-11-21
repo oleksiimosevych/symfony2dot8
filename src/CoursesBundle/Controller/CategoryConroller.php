@@ -15,7 +15,7 @@ use CoursesBundle\Form\CategoryType;
  */
 class CategoryController extends Controller
 {
-	public function indexAction()
+	public function indexcction()
 	{
 		  $em = $this->getDoctrine()->getEntityManager();
 		 
