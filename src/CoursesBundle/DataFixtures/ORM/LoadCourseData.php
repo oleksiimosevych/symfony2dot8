@@ -55,7 +55,21 @@ class LoadCourseData extends AbstractFixture implements OrderedFixtureInterface
     $em->persist($cpp_for_profi);
     $em->persist($cs_for_dummies);
     $em->persist($cs_for_dummies2);
- 
+    
+    //211116 here
+    for($i = 100; $i <= 130; $i++)
+  {
+    $cs_for_dummies3 = new Course();
+    $cs_for_dummies3->setName('C# for dummies_'.$i);
+    $cs_for_dummies3->setCategory($em->merge($this->getReference('category-cs')));
+    $cs_for_dummies3->setContents('We will talk about programming lang C# 3 which....has no_'.$i);
+    $cs_for_dummies3->setPrice(500);    
+    $em->persist($cs_for_dummies3);
+  }
+
+
+
+
     $em->flush();
  
     // $this->addReference('category-java', $java);
