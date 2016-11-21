@@ -8,7 +8,7 @@
     {% for category in categories %}
       <div>
         <div class="category">
-          <h2 class="category">Категорія: {{ category.name }}</h2>
+          <a  href="{{ path('CoursesBundle_category', { 'slug': category.slug }) }}"><h2 class="category">Категорія: {{ category.name }}</h2></a>
         </div>
         <table class="table table-bordered coursos">
           {% for course in category.activecoursos %}
@@ -24,7 +24,14 @@
             </tr>
           {% endfor %}
         </table>
+        {% if category.morecoursos %}
+            <div class="more_coursos">
+              переглянути ще <a href="{{ path('CoursesBundle_category', { 'slug': category.slug }) }}">{{ category.morecoursos }}</a> шт.
+            </div>
+          {% endif %}
+
       </div>
     {% endfor %}
+    <a href="{{ path('course_new')}}">Додати ще</a>
   </div>
 {% endblock %}

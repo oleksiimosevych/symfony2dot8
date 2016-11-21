@@ -31,6 +31,7 @@ class Category
 
 
     private $active_coursos;
+    private $more_coursos;
 
     /**
      * Constructor
@@ -225,6 +226,15 @@ class Category
     return Courses::slugify($this->getName());
     }
  
+    public function setMoreCoursos($coursos)
+    {
+      $this->more_coursos = $coursos >=  0 ? $coursos : 0;
+    }
+     
+    public function getMoreCoursos()
+    {
+      return $this->more_coursos;
+    }
 
 
 }

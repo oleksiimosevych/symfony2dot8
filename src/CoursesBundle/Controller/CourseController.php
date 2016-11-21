@@ -25,6 +25,7 @@ class CourseController extends Controller
         foreach($categories as $category)
           {
           $category->setActiveCoursos($em->getRepository('CoursesBundle:Course')->getActiveCoursos($category->getId(),$this->container->getParameter('max_coursos_on_homepage')));//added here
+          $category->setMoreCoursos($em->getRepository('CoursesBundle:Course')->countActiveCoursos($category->getId())- $this->container->getParameter('max_coursos_on_homepage'));//added here 211116 7 44
           //10 sheets
           }
           //
