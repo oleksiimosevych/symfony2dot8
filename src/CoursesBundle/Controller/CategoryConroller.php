@@ -13,21 +13,11 @@ use CoursesBundle\Form\CategoryType;
  * Course controller.
  *
  */
+/**
+* Category controller.
+*
+*/
 class CategoryController extends Controller
 {
-	public function indexcction()
-	{
-		  $em = $this->getDoctrine()->getEntityManager();
-		 
-		  $categories = $em->getRepository('CoursesBundle:Category')->getWithCoursos();
-		 
-		  foreach($categories as $category)
-		  {
-		    $category->setActiveCoursos($em->getRepository('CoursesBundle:Course')->getActiveCoursos($category->getId(),10));
-		  }
-		 
-		  return $this->render('CousesBundle:Course:index.html.twig', array(
-		    'categories' => $categories
-		  ));
-	}
+ 
 }

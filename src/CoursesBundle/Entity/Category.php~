@@ -1,7 +1,7 @@
 <?php
 
 namespace CoursesBundle\Entity;
-
+//use CoursesBundle\Utils\Courses;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,7 +29,9 @@ class Category
      */
     private $courses;
 
-    private $active_courses;
+
+    private $active_coursos;
+    private $more_coursos;
 
     /**
      * Constructor
@@ -209,13 +211,27 @@ class Category
         return $this->getName();
     }
 
-    public function setActiveCourses($courses)
+    public function setActiveCoursos($coursos)
     {
-    $this->active_courses = $courses;
+    $this->active_coursos = $coursos;
     }
  
-  public function getActiveCourses()
+    public function getActiveCoursos()
     {
-    return $this->active_courses;
+    return $this->active_coursos;
     }
+
+    //removed getslug
+ 
+    public function setMoreCoursos($coursos)
+    {
+      $this->more_coursos = $coursos >=  0 ? $coursos : 0;
+    }
+     
+    public function getMoreCoursos()
+    {
+      return $this->more_coursos;
+    }
+
+
 }

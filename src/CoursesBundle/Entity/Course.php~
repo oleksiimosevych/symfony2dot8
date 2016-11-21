@@ -332,9 +332,11 @@ class Course
      */
     public function setExpiresAt($expiresAt)
     {
-        $this->expires_at = $expiresAt;
-
-        return $this;
+        if(!$this->getExpiresAt()){
+        //$this->expires_at = $expiresAt;
+        $now= $this->getCreatedAt() ? $this->getCreatedAt()->format('U') : time();
+        $this->expires_at = new \DateTime(date('Y-m-d H:i:s', $now + 86400 * 30));
+        }//return $this;
     }
 
     /**

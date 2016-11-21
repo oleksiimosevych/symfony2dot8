@@ -16,6 +16,10 @@ CoursesBundle\Entity\Category:
       type: string
       length: 255
       unique: true
+    slug:
+      type: string
+      length: 255
+      unique: true
     created_at:
       type: datetime
     updated_at:
@@ -26,5 +30,5 @@ CoursesBundle\Entity\Category:
       targetEntity: Course #names of entitiies
       mappedBy: category #the name of the entity who has many things? 
   lifecycleCallbacks:
-    prePersist: [ setCreatedAtValue ]
-    preUpdate: [ setUpdatedAtValue ]  
+    prePersist: [ setSlugAtValue ]
+    preUpdate: [ setSlugAtValue ]  
