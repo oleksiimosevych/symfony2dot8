@@ -20,28 +20,13 @@ class CourseController extends Controller
      */
     public function indexAction()
     {
-        echo "fff";
         $em = $this->getDoctrine()->getManager();
-         
-          $categories = $em->getRepository('CoursesBundle:Category')->getWithCoursos();
-         
-          foreach($categories as $category)
+        $categories = $em->getRepository('CoursesBundle:Category')->getWithCoursos();
+        foreach($categories as $category)
           {
-            $category->setActiveCoursos($em->getRepository('CoursesBundle:Course')->getActiveCoursos($category->getId(),10));
+          $category->setActiveCoursos($em->getRepository('CoursesBundle:Course')->getActiveCoursos($category->getId(),10));
           }
-            foreach($categories as $category)
-          {
-            echo "CATEGORY: ".$category->getName()."<br>";
-                foreach ($category->getActiveCoursos() as $course) {
-                    # code...
-                    echo $course->getName()."<br>";
-
-                }
-              }
-         
-          return $this->render('course/index.html.twig', array(
-            'categories' => $categories
-          ));
+        return $this->render('course/index.html.twig', array('categories' => $categories));
 
         // $em = $this->getDoctrine()->getManager();
 
