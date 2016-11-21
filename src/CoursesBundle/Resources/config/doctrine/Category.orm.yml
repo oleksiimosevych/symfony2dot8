@@ -1,0 +1,30 @@
+# src/CoursesBundle/Resources/config/doctrine/Category.orm.yml
+CoursesBundle\Entity\Category:
+  type: entity
+  repositoryClass: CoursesBundle\Repository\CategoryRepository
+  table: category #table name here
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO } #autoincrement
+  fields:
+    name:
+      type: string
+      length: 255
+      unique: true
+    short_description:
+      type: string
+      length: 255
+      unique: true
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+      nullable: true
+  oneToMany: #one thing of our entity has
+    courses: #many things of this
+      targetEntity: Course #names of entitiies
+      mappedBy: category #the name of the entity who has many things? 
+  lifecycleCallbacks:
+    prePersist: [ setCreatedAtValue ]
+    preUpdate: [ setUpdatedAtValue ]  

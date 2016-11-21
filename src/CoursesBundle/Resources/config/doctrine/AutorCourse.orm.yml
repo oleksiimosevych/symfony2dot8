@@ -1,0 +1,21 @@
+# src/Ens/JobeetBundle/Resources/config/doctrine/Category.orm.yml
+CoursesBundle\Entity\AutorCourse:
+  type: entity
+  table: autor_course #table name here
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO } #autoincrement
+  manyToOne:
+    autor:
+      targetEntity: Autor
+      inversedBy: autor_courses
+      joinColumn:
+        name: autor_id
+        referencedColumnName: id
+    course:
+      targetEntity: Course
+      inversedBy: autor_courses
+      joinColumn:
+        name: course_id
+        referencedColumnName: id

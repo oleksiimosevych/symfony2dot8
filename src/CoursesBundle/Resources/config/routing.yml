@@ -1,0 +1,16 @@
+courses_cour:
+    resource: "@CoursesBundle/Resources/config/routing/course.yml"
+    prefix:   /courses
+
+courses_homepage:
+    path:     /
+    # pattern:  /hello/{name}
+    defaults: { _controller: CoursesBundle:Course:index }
+#src/bun/res/conf/routing.yml
+# CoursesBundle_course:
+#      resource: "@CoursesBundle/Resources/config/routing/course.yml"
+#     prefix: /courses
+
+# CoursesBundle_homepage:
+#     pattern: /
+#     defaults: { _controller: CoursesBundle:Course:index }

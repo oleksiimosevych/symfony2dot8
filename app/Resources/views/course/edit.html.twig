@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<link rel="stylesheet" href="{{ asset('bundles/courses/css/main.css') }}" type="text/css" media="all" />
+<center>    <h1>Course edit</h1>
+<div id="edit">
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <button>
+            <a href="{{ path('course_index') }}">Повернутися до перегляду усіх курсів</a>
+        </button>
+        <button>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </button>
+    </ul>
+</div>
+
+{% endblock %}

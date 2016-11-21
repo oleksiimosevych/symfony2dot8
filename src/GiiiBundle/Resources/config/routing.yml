@@ -1,0 +1,3 @@
+giii_homepage:
+    path:     /
+    defaults: { _controller: GiiiBundle:Default:index }

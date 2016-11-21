@@ -1,0 +1,16 @@
+
+<link rel="stylesheet" href="{{ asset('bundles/courses/css/main.css') }}" type="text/css" media="all" />
+{% block body %}
+<center>    <h1>Створити новий курс</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Створити" />
+    {{ form_end(form) }}
+
+    <ul>
+        <button>
+            <a href="{{ path('course_index') }}">Повернутися назад</a>
+        </button>
+    </ul>
+{% endblock %}

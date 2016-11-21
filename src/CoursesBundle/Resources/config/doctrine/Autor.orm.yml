@@ -1,0 +1,40 @@
+# src/Ens/JobeetBundle/Resources/config/doctrine/Autor.orm.yml
+CoursesBundle\Entity\Autor:
+  type: entity
+  table: autor #table name here
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO } #autoincrement
+  fields:
+    name:
+      type: string
+      length: 255
+      unique: true
+    mail: #e
+      type: string
+      length: 100
+      unique: true
+    phone: #num
+      type: string
+      length: 255
+      unique: true
+    address:
+      type: string
+      length: 255
+      unique: false
+    price:
+      type: integer
+      unique: false
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+      nullable: true
+  oneToMany: #one thing of our entity has
+    autor_courses: #many things of this
+      targetEntity: AutorCourse #names of entitiies
+      mappedBy: autor #the name of the entity who has many things? 
+  lifecycleCallbacks:
+    prePersist: [ setCreatedAtValue ]
+    preUpdate: [ setUpdatedAtValue ]

@@ -1,0 +1,43 @@
+# src/Ens/JobeetBundle/Resources/config/doctrine/Category.orm.yml
+CoursesBundle\Entity\Course:
+  type: entity
+  repositoryClass: CoursesBundle\Repository\CourseRepository
+  table: course #table name here
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO } #autoincrement
+  fields:
+    name:
+      type: string
+      length: 255
+      unique: true
+    contents: #vmist
+      type: string
+      length: 255
+      unique: true
+    price: #vmist
+      type: integer
+      unique: false
+    created_at:
+      type: datetime
+    updated_at:
+      type: datetime
+      nullable: true
+    expires_at:
+      type: datetime
+      nullable: true
+  manyToOne:
+    category:
+      targetEntity: Category
+      inversedBy: courses
+      joinColumn:
+        name: category_id
+        referencedColumnName: id
+  oneToMany: #one thing of our entity has
+    autor_courses: #many things of this
+      targetEntity: AutorCourse #names of entitiies
+      mappedBy: course #the name of the entity who has many things? 
+  lifecycleCallbacks:
+    prePersist: [ setCreatedAtValue , setExpiresAtValue]
+    preUpdate: [ setUpdatedAtValue ]
