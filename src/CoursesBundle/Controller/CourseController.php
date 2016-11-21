@@ -27,6 +27,9 @@ class CourseController extends Controller
           $category->setActiveCoursos($em->getRepository('CoursesBundle:Course')->getActiveCoursos($category->getId(),$this->container->getParameter('max_coursos_on_homepage')));//added here
           //10 sheets
           }
+          //
+
+
         return $this->render('course/index.html.twig', array('categories' => $categories));
 
         // $em = $this->getDoctrine()->getManager();
@@ -69,7 +72,14 @@ class CourseController extends Controller
      */
     public function showAction(Course $course)
     {
-        $deleteForm = $this->createDeleteForm($course);
+      $deleteForm = $this->createDeleteForm($course);
+      try{
+      $id=$course->getId();
+      $em = $this->getDoctrine()->getManager();
+      $course = $em->getRepository('CoursesBundle:Course')->getActiveCourse($id);
+      }catch(Exception $e){
+        echo "zz";
+      }
 
         return $this->render('course/show.html.twig', array(
             'course' => $course,

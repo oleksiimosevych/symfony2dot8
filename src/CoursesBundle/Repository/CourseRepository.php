@@ -32,4 +32,24 @@ class CourseRepository extends EntityRepository
  
     return $query->getResult();
   }
+//new func 6 40 at 211116
+  public function getActiveCourse($id)
+  {
+    $query = $this->createQueryBuilder('j')
+      ->where('j.id = :id')
+      ->setParameter('id', $id)
+      ->andWhere('j.expires_at > :date')
+      ->setParameter('date', date('Y-m-d H:i:s', time()))
+      ->setMaxResults(1)
+      ->getQuery();
+   
+    try {
+      $course = $query->getSingleResult();
+    } catch (\Doctrine\Orm\NoResultException $e) {
+      $course = null;
+      echo "<table class='table'><h1>Цей курс уже пройшов. Вибачте :'(</h1>";
+    }
+ 
+  return $course;
+  }
 }
