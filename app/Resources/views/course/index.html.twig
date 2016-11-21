@@ -4,19 +4,19 @@
     {% endblock %}
 {% block body %}
 
-  <div id="coursos">
+  <div id="coursos" class="blog-info">
     {% for category in categories %}
       <div>
         <div class="category">
-          <h1>{{ category.name }}</h1>
+          <h2 class="category">Категорія: {{ category.name }}</h2>
         </div>
         <table class="table table-bordered coursos">
           {% for course in category.activecoursos %}
             <tr class="{{ cycle(['even', 'odd'], loop.index) }} table table-bordered"></tr>
               <td class="cname">Lets Learn <b>{{course.name}}</b></td>
-              <td class="location">Price: ${{course.price}}</td>
-              <td class="position">
-                <a href="{{ path('course_show', { 'id': course.id, 'name': course.nameslug, 'price': course.priceslug, 'category': course.categoryslug }) }}">Перейти на курс</a>
+              <td class="cprice">Купити негайно за ${{course.price}}</td>
+              <td class="cedit">
+                <a href="{{ path('course_show', { 'id': course.id, 'name': course.nameslug, 'price': course.priceslug, 'category': course.categoryslug }) }}">Попередній перегляд</a>
                     <!--<a href="{{ path('course_edit', { 'id': course.id }) }}">Редагувати</a>-->
                     <br>
               </td>

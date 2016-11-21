@@ -29,3 +29,12 @@ text-decoration: none !important;}
     margin-left: 470px;
     
 }
+.category{
+	background-color: #7DE;
+	border-radius: 15px;
+	padding-left: 10px;
+	padding: 1px;
+}
+.cname, .cprice, .cedit{
+	width:33%;
+}
