@@ -1,8 +1,9 @@
 <?php
 
 namespace CoursesBundle\Entity;
-//use CoursesBundle\Utils\Courses;
+//use CoursesBundleUtilsCourses as Courses;//jobeet!
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Category
