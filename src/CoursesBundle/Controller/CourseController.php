@@ -24,7 +24,8 @@ class CourseController extends Controller
         $categories = $em->getRepository('CoursesBundle:Category')->getWithCoursos();
         foreach($categories as $category)
           {
-          $category->setActiveCoursos($em->getRepository('CoursesBundle:Course')->getActiveCoursos($category->getId(),10));//10 sheets
+          $category->setActiveCoursos($em->getRepository('CoursesBundle:Course')->getActiveCoursos($category->getId(),$this->container->getParameter('max_coursos_on_homepage')));//added here
+          //10 sheets
           }
         return $this->render('course/index.html.twig', array('categories' => $categories));
 
