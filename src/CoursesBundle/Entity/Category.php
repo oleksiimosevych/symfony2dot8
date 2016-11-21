@@ -1,7 +1,7 @@
 <?php
 
 namespace CoursesBundle\Entity;
-
+//use CoursesBundle\Utils\Courses;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -215,8 +215,16 @@ class Category
     $this->active_coursos = $coursos;
     }
  
-  public function getActiveCoursos()
+    public function getActiveCoursos()
     {
     return $this->active_coursos;
     }
+
+    public function getSlug()
+    {
+    return Courses::slugify($this->getName());
+    }
+ 
+
+
 }

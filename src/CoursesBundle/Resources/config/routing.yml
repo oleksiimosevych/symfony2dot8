@@ -6,6 +6,10 @@ courses_homepage:
     path:     /
     # pattern:  /hello/{name}
     defaults: { _controller: CoursesBundle:Course:index }
+
+CoursesBundle_category:
+    pattern:  /category/{slug}
+    defaults: { _controller: CoursesBundle:Category:show }
 #src/bun/res/conf/routing.yml
 # CoursesBundle_course:
 #      resource: "@CoursesBundle/Resources/config/routing/course.yml"
