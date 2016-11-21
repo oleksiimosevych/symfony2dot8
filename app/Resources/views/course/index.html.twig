@@ -8,20 +8,17 @@
     {% for category in categories %}
       <div>
         <div class="category">
-          <div class="feed">
-            <a href="">Feed</a>
-          </div>
           <h1>{{ category.name }}</h1>
         </div>
         <table class="table table-bordered coursos">
           {% for course in category.activecoursos %}
-            <tr class="{{ cycle(['even', 'odd'], loop.index) }} table table-bordered">
+            <tr class="{{ cycle(['even', 'odd'], loop.index) }} table table-bordered"></tr>
               <td class="cname">Lets Learn <b>{{course.name}}</b></td>
               <td class="location">Price: ${{course.price}}</td>
               <td class="position">
                 <a href="{{ path('course_show', { 'id': course.id, 'name': course.nameslug, 'price': course.priceslug, 'category': course.categoryslug }) }}">Перейти на курс</a>
                     <!--<a href="{{ path('course_edit', { 'id': course.id }) }}">Редагувати</a>-->
-                    <br><hr>
+                    <br>
               </td>
               
             </tr>
