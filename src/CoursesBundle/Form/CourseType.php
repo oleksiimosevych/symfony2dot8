@@ -29,7 +29,7 @@ class CourseType extends AbstractType
             ->add('updated_at', null, array('label' => 'Дата оновлення курсу'))
             ->add('category', null, array('label' => 'Категорія курсу'))
             ->add('file', 'file', array('label' => 'Логотип курсу', 'required' => false))
-            ->add('type', 'choice', array('choices' => Course::getTypes(), 'expanded' => true))
+            ->add('type', 'choice', array('label' => 'Тип курсу','choices' => Course::getTypes(), 'expanded' => true))
         ;
     }
     

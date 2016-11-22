@@ -1,23 +1,114 @@
 {% extends 'base.html.twig' %}
-{% block body %}
-<link rel="stylesheet" href="{{ asset('bundles/courses/css/main.css') }}" type="text/css" media="all" />
-<center>    <h1>Course edit</h1>
-<table id="edit" class="table ">
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
 
-    <ul>
-        <button>
-            <a href="{{ path('course_index') }}">Повернутися до перегляду усіх курсів</a>
-        </button>
+{% form_theme edit_form _self %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <ul class="error_list">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+{% block stylesheets %}
+    {{ parent() }}
+   <link rel="stylesheet" href="{{ asset('bundles/courses/css/main.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block body%}
+<h1>Оновлення курсу</h1>
+    <form action="{{ path('course_edit', { 'id': course.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        <table id="course_form" class="table">
+            <tbody>
+                <tr>
+                    <th>{{ form_label(edit_form.category) }}</th>
+                    <td>
+                        {{ form_errors(edit_form.category) }}
+                        {{ form_widget(edit_form.category) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(edit_form.name) }}</th>
+                    <td>
+                        {{ form_errors(edit_form.name) }}
+                        {{ form_widget(edit_form.name) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(edit_form.price) }}</th>
+                    <td>
+                        {{ form_errors(edit_form.price) }}
+                        {{ form_widget(edit_form.price) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(edit_form.created_at) }}</th>
+                    <td>
+                        {{ form_errors(edit_form.created_at) }}
+                        {{ form_widget(edit_form.created_at) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(edit_form.updated_at) }}</th>
+                    <td>
+                        {{ form_errors(edit_form.updated_at) }}
+                        {{ form_widget(edit_form.updated_at) }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>{{ form_label(edit_form.type) }}</th>
+                    <td>
+                        {{ form_errors(edit_form.type) }}
+                        {{ form_widget(edit_form.type) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(edit_form.file) }}</th>
+                    <td>
+                        {{ form_errors(edit_form.file) }}
+                        {{ form_widget(edit_form.file) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(edit_form.contents) }}</th>
+                    <td>
+                        {{ form_errors(edit_form.contents) }}
+                        {{ form_widget(edit_form.contents) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(edit_form.token) }}</th>
+                    <td>
+                        {{ form_errors(edit_form.token) }}
+                        {{ form_widget(edit_form.token) }}
+                    </td>
+                </tr>
+
+            </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Оновити курс" />
+                    </td>
+                </tr>
+            </tfoot>
+        
+        </table>
+    {{ form_end(edit_form) }}
+    
+
+        <h3>
+            <a href="{{ path('course_index') }}">Повернутися на головну</a>
+        </h3>
         <button>
             {{ form_start(delete_form) }}
                 <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </button>
-    </ul>
-</table>
 
 {% endblock %}
