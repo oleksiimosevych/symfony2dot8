@@ -4,21 +4,39 @@ course_index:
     methods:  GET
 
 course_show:
-    path:     /{name}/{price}/{id}/{category}
+    path:     /{name}/{id}/{category}
     defaults: { _controller: "CoursesBundle:Course:show" }
+    methods:  GET
+
+course_preview:
+    path:     /{name}/{token}/{category}/preview
+    defaults: { _controller: "CoursesBundle:Course:preview" }
     methods:  GET
 
 course_new:
     path:     /new
     defaults: { _controller: "CoursesBundle:Course:new" }
     # methods:  [GET, POST]
+course_create:
+    path:     /new
+    defaults: { _controller: "CoursesBundle:Course:create" }
+    # methods:  [GET, POST]
 
 course_edit:
-    path:     /{id}/edit
+    path:     /{token}/edit
     defaults: { _controller: "CoursesBundle:Course:edit" }
     # methods:  [GET, POST]
 
+
+course_update:
+    path:     /{token}/update
+    defaults: { _controller: "CoursesBundle:Course:update" }
+    # methods:  [GET, POST]
+    requirements: { _method: post|put }
+
 course_delete:
-    path:     /{id}/delete
+    path:     /{token}/delete
     defaults: { _controller: "CoursesBundle:Course:delete" }
-    methods:  DELETE
+    # methods:  DELETE
+    requirements: { _method: post|delete }
+#update?

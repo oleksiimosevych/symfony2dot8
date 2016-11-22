@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <link rel="stylesheet" href="{{ asset('bundles/courses/css/main.css') }}" type="text/css" media="all" />
+    {% if app.request.get('token') %}
+        {% include 'CoursesBundle:Course:admin.html.twig' with {'course': course} %}
+    {% endif %}
     <h1>Course</h1>
-    <style type="text/css">
-        
-    </style>
     <center><table class="table table-bordered" id='courses_table'>
         <tbody>
             <tr>
@@ -38,17 +38,12 @@
         </tbody>
     </table>
 
-    <ul>
+
         <h3>
             <a href="{{ path('course_index') }}">Повернутися на головну</a>
         </h3>
         <h3>
-            <a href="{{ path('course_edit', { 'id': course.id }) }}">Оновити</a>
+            <a href="{{ path('course_edit', { 'token': course.token }) }}">Оновити</a>
         </h3>
-        <h3>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Видалити">
-            {{ form_end(delete_form) }}
-        </h3>
-    </ul>
+
 {% endblock %}

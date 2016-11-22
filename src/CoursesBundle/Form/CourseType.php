@@ -21,9 +21,9 @@ class CourseType extends AbstractType
             //->add('logo', null, array('label' => 'Course logo'))
             //->add('type', null, array('label' => 'Тип курсу'))
             //->add('logo', null, array('label' => 'Логотип курсу')) replace with FILE
-            ->add('token', null, array('label' => 'Ключ курсу'))
+            //->add('token', null, array('label' => 'Ключ курсу'))
             ->add('name', null, array('label' => 'Назва курсу'))
-            ->add('contents', null, array('label' => 'Опис  курсу'))
+            ->add('contents', 'textarea', array('attr' => array('cols' => '100', 'rows' => '10'), 'label' => 'Опис  курсу'))
             ->add('price', null, array('label' => 'Ціна  курсу'))
             ->add('created_at', null, array('label' => 'Дата створення курсу(по-замовчуванню - поточна дата)'))
             ->add('updated_at', null, array('label' => 'Дата оновлення курсу'))

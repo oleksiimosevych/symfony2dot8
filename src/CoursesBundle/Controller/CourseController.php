@@ -49,6 +49,34 @@ class CourseController extends Controller
      */
     public function newAction(Request $request)
     {
+      $timenow = date("Y-m-d H:i");
+      //$timenow2=  $now->format("m-d-Y H:i:s.u");
+      //$timenow='2016-11-22 11:00';
+        $course = new Course();
+        // $course->setType('full-time');
+        $course->setType('full-time');
+        
+        $course->setCreatedAt(new \DateTime($timenow));
+        $course->setUpdatedAt(new \DateTime($timenow));
+        
+        $form = $this->createForm(new CourseType, $course);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($course);
+            $em->flush();
+
+            return $this->redirectToRoute('course_show', array('id' => $course->getId()));
+        }
+
+        return $this->render('course/new.html.twig', array(
+            'course' => $course,
+            'form' => $form->createView(),
+        ));
+    }
+    public function createAction(Request $request)
+    {
         $course = new Course();
         $form = $this->createForm(new CourseType, $course);//new
         //$form->handleRequest($request);
@@ -103,19 +131,27 @@ class CourseController extends Controller
      * Displays a form to edit an existing Course entity.
      *
      */
-    public function editAction(Request $request, Course $course)
+    public function editAction($token)
     {
-        $deleteForm = $this->createDeleteForm($course);
-        $editForm = $this->createForm('CoursesBundle\Form\CourseType', $course);
-        $editForm->handleRequest($request);
+        // 
+        // 
+        // $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        //if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($course);
-            $em->flush();
+            $course = $em->getRepository('CoursesBundle:Course')->findOneByToken($token);
+            if (! $course) {
+              # code...
+              throw $this->createNotFoundException('Unable to find Course entity.');
+            }
+            $editForm = $this->createForm(new CourseType, $course); 
+            $deleteForm = $this->createDeleteForm($token);
 
-            return $this->redirectToRoute('course_edit', array('id' => $course->getId()));
-        }
+            //$em->persist($course);
+            //$em->flush();
+
+            //return $this->redirectToRoute('course_edit', array('id' => $course->getId()));
+        // }
 
         return $this->render('course/edit.html.twig', array(
             'course' => $course,
@@ -123,23 +159,59 @@ class CourseController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    /////////////
+    public function updateAction(Request $request, $token)
+    {
+        $em = $this->getDoctrine()->getManager();
+ 
+        $course = $em->getRepository('CoursesBundle:Course')->findOneByToken($token);
+ 
+        if (!$course) {
+            throw $this->createNotFoundException('Unable to find Course entity.');
+        }
+ 
+        $editForm   = $this->createForm(new CourseType(), $course);
+        $deleteForm = $this->createDeleteForm($token);
+ 
+        $editForm->bind($request);
+ 
+        if ($editForm->isValid()) {
+            $em->persist($course);
+            $em->flush();
+ 
+            return $this->redirect($this->generateUrl('course_edit', array('token' => $token)));
+        }
+ 
+        return $this->render('course/edit.html.twig', array(
+            'course'      => $course,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
 
+    /////////////
     /**
      * Deletes a Course entity.
      *
      */
-    public function deleteAction(Request $request, Course $course)
+    public function deleteAction(Request $request, $token)
     {
-        $form = $this->createDeleteForm($course);
-        $form->handleRequest($request);
+        $form = $this->createDeleteForm($token);
+        $form->bind($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if (/*$form->isSubmitted() &&*/ $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $course= $em->getRepository('CourseBundle:Course')->findOneByToken($token);
+
+            if(! $course){
+              throw $this->createNotFoundException('Unable to find Course entity.');
+            }
             $em->remove($course);
             $em->flush();
         }
 
-        return $this->redirectToRoute('course_index');
+        //return $this->redirectToRoute('course_index');
+        return $this->redirect($this->generateUrl('course_index'));
     }
 
     /**
@@ -149,12 +221,38 @@ class CourseController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Course $course)
+    private function createDeleteForm($token)
     {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('course_delete', array('id' => $course->getId())))
-            ->setMethod('DELETE')
+        return $this->createFormBuilder(array('token' => $token))
+            ->add('token', 'hidden')
             ->getForm()
         ;
+        //     ->setAction($this->generateUrl('course_delete', array('id' => $course->getId())))
+        //     ->setMethod('DELETE')
+        //     ->getForm()
+        // ;
     }
+
+
+    public function previewAction($token)
+    {
+      
+        $em = $this->getDoctrine()->getManager();
+ 
+        $course = $em->getRepository('CoursesBundle:Course')->findOneByToken($token);
+ 
+        if (!$course) {
+            throw $this->createNotFoundException('Unable to find Course entity.');
+        }
+ 
+        $deleteForm = $this->createDeleteForm($course->getId());
+ 
+        return $this->render('course/show.html.twig', array(
+            'course'      => $course,//entity??
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+
+
 }

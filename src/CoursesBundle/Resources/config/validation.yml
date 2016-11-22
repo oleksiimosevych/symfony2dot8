@@ -11,10 +11,6 @@ CoursesBundleEntityCourse:
             - NotBlank: ~
         updated_at:
             - NotBlank: ~    
-        token:
-            - NotBlank: ~
-        # url:
-        #     - Url: ~
         file:
             - Image: ~ #here we are
         type:

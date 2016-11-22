@@ -7,7 +7,7 @@
     {% if errors|length > 0 %}
         <ul class="error_list">
             {% for error in errors %}
-                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+                <li><font color="red">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</font></li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -21,16 +21,16 @@
 
 {% block body%}
 <h1>Ви бажаєте додати новий курс</h1>
-    <form action="{{ path('course_new') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('course_create' ) }}" method="post" {{ form_enctype(form) }}>
         <table id="course_form" class="table">
             <tfoot>
                 <tr>
                     <td colspan="2">
-                        <input type="submit" value="Preview your Course" />
+                        <input type="submit" value="Створити курс" />
                     </td>
                 </tr>
             </tfoot>
-            <tbody>
+            <tbody id="new_course">
                 <tr>
                     <th>{{ form_label(form.category) }}</th>
                     <td>
@@ -38,6 +38,43 @@
                         {{ form_widget(form.category) }}
                     </td>
                 </tr>
+                
+                <tr>
+                    <th>{{ form_label(form.name) }}</th>
+                    <td>
+                        {{ form_errors(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.contents) }}</th>
+                    <td>
+                        {{ form_errors(form.contents) }}
+                        {{ form_widget(form.contents) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.price) }}</th>
+                    <td>
+                        {{ form_errors(form.price) }}
+                        {{ form_widget(form.price) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.created_at) }}</th>
+                    <td>
+                        {{ form_errors(form.created_at) }}
+                        {{ form_widget(form.created_at) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.updated_at) }}</th>
+                    <td>
+                        {{ form_errors(form.updated_at) }}
+                        {{ form_widget(form.updated_at) }}
+                    </td>
+                </tr>
+
                 <tr>
                     <th>{{ form_label(form.type) }}</th>
                     <td>
@@ -52,21 +89,7 @@
                         {{ form_widget(form.file) }}
                     </td>
                 </tr>
-                <tr>
-                    <th>{{ form_label(form.contents) }}</th>
-                    <td>
-                        {{ form_errors(form.contents) }}
-                        {{ form_widget(form.contents) }}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{ form_label(form.token) }}</th>
-                    <td>
-                        {{ form_errors(form.token) }}
-                        {{ form_widget(form.token) }}
-                    </td>
-                </tr>
-
+                
             </tbody>
         </table>
     {{ form_end(form) }}

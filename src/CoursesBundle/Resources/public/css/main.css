@@ -21,7 +21,7 @@ text-decoration: none !important;}
 	border-radius: 15px;
 .a{text-decoration: none;}
 #courses_table{background-color: #7DE;}
-
+table tbody tr td{width:33%;}
 #edit{
 	border-radius: 15px;
 	background-color: #7DE;

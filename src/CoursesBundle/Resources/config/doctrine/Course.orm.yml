@@ -52,7 +52,7 @@ CoursesBundle\Entity\Course:
       mappedBy: course #the name of the entity who has many things? 
   lifecycleCallbacks:
     #added preUpload
-    prePersist: [ preUpload, setCreatedAtValue , setExpiresAtValue]
+    prePersist: [ setTokenValue, preUpload, setCreatedAtValue , setExpiresAtValue]
     preUpdate: [ preUpload, setUpdatedAtValue ]
     #added here
     postPersist: [ upload ]
