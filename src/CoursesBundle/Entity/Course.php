@@ -348,4 +348,15 @@ class Course
     {
         return $this->expires_at;
     }
+
+     public static function getTypes()
+    {
+        return array('full-time' => 'Full time', 'part-time' => 'Part time', 'freelance' => 'Freelance');
+    }
+ 
+    public static function getTypeValues()
+    {
+        return array_keys(self::getTypes());
+    }
+    
 }

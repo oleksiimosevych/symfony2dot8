@@ -1,0 +1,5 @@
+CoursesBundleEntityCourse:
+    properties:
+        name:
+            - NotBlank: ~
+            # - Email: ~
