@@ -92,11 +92,11 @@ class CourseController extends Controller
             $em->flush();
 
             //return $this->redirectToRoute('course_show', array('id' => $course->getId()));
-            return $this->redirect($this->generateUrl('course_show', array(
+            return $this->redirect($this->generateUrl('course_preview', array(
             'name' => $course->getNameSlug(),
             'price' => $course->getPriceSlug(),
             'category' => $course->getCategorySlug(),
-            'id' => $course->getId()
+            'token' => $course->getToken()
         )));
         }
 
@@ -179,7 +179,13 @@ class CourseController extends Controller
             $em->persist($course);
             $em->flush();
  
-            return $this->redirect($this->generateUrl('course_edit', array('token' => $token)));
+            //return $this->redirect($this->generateUrl('course_preview', array('token' => $token)));
+            return $this->redirect($this->generateUrl('course_preview', array(
+              'name' => $course->getNameSlug(),
+              'price' => $course->getPriceSlug(),
+              'category' => $course->getCategorySlug(),
+              'token' => $course->getToken()
+              )));
         }
  
         return $this->render('course/edit.html.twig', array(
@@ -236,7 +242,7 @@ class CourseController extends Controller
 
     public function previewAction($token)
     {
-      
+
         $em = $this->getDoctrine()->getManager();
  
         $course = $em->getRepository('CoursesBundle:Course')->findOneByToken($token);
@@ -245,14 +251,53 @@ class CourseController extends Controller
             throw $this->createNotFoundException('Unable to find Course entity.');
         }
  
-        $deleteForm = $this->createDeleteForm($course->getId());
+        $deleteForm = $this->createDeleteForm($course->getToken());
+        $publishForm = $this->createPublishForm($course->getToken());
+
  
         return $this->render('course/show.html.twig', array(
             'course'      => $course,//entity??
             'delete_form' => $deleteForm->createView(),
+            'publish_form' => $publishForm->createView(),
         ));
     }
 
+
+    public function publishAction(Request $request, $token)
+  {
+    $form = $this->createPublishForm($token);
+    $form->bind($request);
+ 
+    if ($form->isValid()) {
+        $em = $this->getDoctrine()->getManager();
+        $course = $em->getRepository('CoursesBundle:Course')->findOneByToken($token);
+ 
+        if (!$course) {
+            throw $this->createNotFoundException('Unable to find Course entity.');
+        }
+ 
+        $course->publish();
+        $em->persist($course);
+        $em->flush();
+ 
+        $this->get('session')->getFlashBag()->add('notice', 'Your course is now online for 30 days.');
+    }
+ 
+    return $this->redirect($this->generateUrl('course_preview', array(
+        'name' => $course->getNameSlug(),
+        'price' => $course->getPriceSlug(),
+        'category' => $course->getCategorySlug(),
+        'token' => $course->getToken()
+    )));
+  }
+
+  private function createPublishForm($token)
+  {
+    return $this->createFormBuilder(array('token' => $token))
+        ->add('token', 'hidden')
+        ->getForm()
+    ;
+  }
 
 
 }

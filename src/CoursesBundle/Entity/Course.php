@@ -533,4 +533,38 @@ class Course
     {
         return ceil(($this->getExpiresAt()->format('U') - time()) / 86400);
     }
+
+   
+    /**
+     * @var boolean
+     */
+    private $is_activated;
+
+
+    /**
+     * Set is_activated
+     *
+     * @param boolean $isActivated
+     * @return Course
+     */
+    public function setIsActivated($isActivated)
+    {
+        $this->is_activated = $isActivated;
+
+        return $this;
+    }
+
+    /**
+     * Get is_activated
+     *
+     * @return boolean 
+     */
+    public function getIsActivated()
+    {
+        return $this->is_activated;
+    }
+     public function publish()
+        {
+            $this->setIsActivated(true);
+        }
 }

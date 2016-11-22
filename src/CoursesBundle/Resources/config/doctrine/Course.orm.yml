@@ -20,6 +20,9 @@ CoursesBundle\Entity\Course:
       type: string
       length: 255
       nullable: true
+    is_activated:
+      type: boolean
+      nullable: true
     name:
       type: string
       length: 255

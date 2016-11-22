@@ -39,4 +39,8 @@ course_delete:
     defaults: { _controller: "CoursesBundle:Course:delete" }
     # methods:  DELETE
     requirements: { _method: post|delete }
-#update?
+
+course_publish:
+    pattern:  /{token}/publish
+    defaults: { _controller: "CoursesBundle:Course:publish" }
+    requirements: { _method: post }
