@@ -7,21 +7,7 @@
     {% if category.updatedat %} і востаннє оновлено <b> {{ category.updatedat|date('Y-m-d H:i:s') }}{% endif %}</b></p>
     </div>
 <a href="{{ path('course_index') }}" class ="odd table table-bordered"><------Повернутися</a>
-    <table class="coursos table">
-        {% for entity in category.activecoursos %}
-            <tr class="{{ cycle(['even', 'odd'], loop.index) }} odd table table-bordered">
-                <td class="cname">Курс <b>"{{entity.name}}"</b></td>
-                <td class="cprice">$"{{entity.price}}"</td>
-                
-                <td class="cprice">
-                    <a href="{{ path('course_show', { 'id': entity.id, 'name': entity.nameslug, 'price': entity.priceslug, 'category': entity.categoryslug }) }}">Попередній перегляд</a>
-                        
-                    </a>
-                </td>
-                
-            </tr>
-        {% endfor %}
-    </table>
+   {{ include ('CoursesBundle:Course:list.html.twig', {'coursos': category.activecoursos})  }}
 
 
 

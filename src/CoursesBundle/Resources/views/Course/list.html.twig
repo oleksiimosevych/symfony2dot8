@@ -1,0 +1,14 @@
+        <table class="table table-bordered coursos">
+          {% for course in category.activecoursos %}
+            <tr class="{{ cycle(['even', 'odd'], loop.index) }} table table-bordered"></tr>
+              <td class="cname">Lets Learn <b>{{course.name}}</b></td>
+              <td class="cprice">Купити негайно за ${{course.price}}</td>
+              <td class="cedit">
+                <a href="{{ path('course_show', { 'id': course.id, 'name': course.nameslug, 'price': course.priceslug, 'category': course.categoryslug }) }}">Попередній перегляд</a>
+                    <!--<a href="{{ path('course_edit', { 'id': course.id }) }}">Редагувати</a>-->
+                    <br>
+              </td>
+              
+            </tr>
+          {% endfor %}
+        </table>

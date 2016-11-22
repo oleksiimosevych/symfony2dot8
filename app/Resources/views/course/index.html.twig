@@ -10,20 +10,7 @@
         <div class="category">
           <a  href="{{ path('category_show', { 'slug': category.slug }) }}"><h2 class="category">Категорія: {{ category.name }}</h2></a>
         </div>
-        <table class="table table-bordered coursos">
-          {% for course in category.activecoursos %}
-            <tr class="{{ cycle(['even', 'odd'], loop.index) }} table table-bordered"></tr>
-              <td class="cname">Lets Learn <b>{{course.name}}</b></td>
-              <td class="cprice">Купити негайно за ${{course.price}}</td>
-              <td class="cedit">
-                <a href="{{ path('course_show', { 'id': course.id, 'name': course.nameslug, 'price': course.priceslug, 'category': course.categoryslug }) }}">Попередній перегляд</a>
-                    <!--<a href="{{ path('course_edit', { 'id': course.id }) }}">Редагувати</a>-->
-                    <br>
-              </td>
-              
-            </tr>
-          {% endfor %}
-        </table>
+        {{ include ('CoursesBundle:Course:list.html.twig', {'coursos': category.activecoursos})  }}
         {% if category.morecoursos %}
             <div class="more_coursos">
               переглянути ще <a href="{{ path('category_show', { 'slug': category.slug }) }}">{{ category.morecoursos }}</a> шт.
