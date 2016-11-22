@@ -348,4 +348,6 @@ class Course
     {
         return $this->expires_at;
     }
+
+    public $file;
 }

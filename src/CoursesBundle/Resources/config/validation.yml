@@ -9,5 +9,12 @@ CoursesBundleEntityCourse:
             - NotBlank: ~
         created_at:
             - NotBlank: ~
+        token:
+            - NotBlank: ~
         # url:
         #     - Url: ~
+        file:
+            - Image: ~
+        type:
+            - NotBlank: ~
+            - Choice: { callback: getTypeValues }

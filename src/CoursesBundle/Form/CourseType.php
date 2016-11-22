@@ -2,6 +2,7 @@
 
 namespace CoursesBundle\Form;
 
+use CoursesBundle\Entity\Course;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,13 +19,17 @@ class CourseType extends AbstractType
     {
         $builder
             //->add('logo', null, array('label' => 'Course logo'))
+            //->add('type', null, array('label' => 'Тип курсу'))
+            ->add('logo', null, array('label' => 'Логотип курсу'))
+            ->add('token', null, array('label' => 'Ключ курсу'))
             ->add('name', null, array('label' => 'Назва курсу'))
             ->add('contents', null, array('label' => 'Опис  курсу'))
             ->add('price', null, array('label' => 'Ціна  курсу'))
             ->add('created_at', null, array('label' => 'Дата створення курсу(по-замовчуванню - поточна дата)'))
             ->add('updated_at', null, array('label' => 'Дата оновлення курсу'))
             ->add('category', null, array('label' => 'Категорія курсу'))
-            //->add('type', 'choice', array('choices' => Course::getTypes(), 'expanded' => true))
+            ->add('file', 'file', array('label' => 'Course logo', 'required' => false))
+            ->add('type', 'choice', array('choices' => Course::getTypes(), 'expanded' => true))
         ;
     }
     

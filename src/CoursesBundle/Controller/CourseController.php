@@ -56,6 +56,10 @@ class CourseController extends Controller
 
         if (/*$form->isSubmitted() && */$form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $course->file->move(__DIR__.'/../../../../web/uploads/coursos', $course->file->getClientOriginalName());
+            $course->setLogo($course->file->getClientOriginalName());//now we need logo
+
             $em->persist($course);
             $em->flush();
 
