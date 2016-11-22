@@ -5,11 +5,13 @@ course_index:
 
 course_show:
     path:     /{name}/{id}/{category}
+    # path:     /{category}/{id}
     defaults: { _controller: "CoursesBundle:Course:show" }
     methods:  GET
 
 course_preview:
-    path:     /{name}/{token}/{category}/preview
+    path:     /{name}/{token}/{category}/root
+    # path:     /{category}/{token}/root
     defaults: { _controller: "CoursesBundle:Course:preview" }
     methods:  GET
 

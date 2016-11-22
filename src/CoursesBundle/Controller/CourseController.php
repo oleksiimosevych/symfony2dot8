@@ -207,7 +207,7 @@ class CourseController extends Controller
 
         if (/*$form->isSubmitted() &&*/ $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $course= $em->getRepository('CourseBundle:Course')->findOneByToken($token);
+            $course= $em->getRepository('CoursesBundle:Course')->findOneByToken($token);
 
             if(! $course){
               throw $this->createNotFoundException('Unable to find Course entity.');

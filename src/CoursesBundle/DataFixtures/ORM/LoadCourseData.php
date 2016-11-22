@@ -70,7 +70,8 @@ class LoadCourseData extends AbstractFixture implements OrderedFixtureInterface
     $cs_for_dummies3->setToken('cs_for_dummies3_'.$i);
     $cs_for_dummies3->setCategory($em->merge($this->getReference('category-cs')));
     $cs_for_dummies3->setContents('We will talk about programming lang C# 3 which....has no_'.$i);
-    $cs_for_dummies3->setPrice(500);    
+    $cs_for_dummies3->setPrice(500);
+    $cs_for_dummies3->setIsActivated(true);    
     $em->persist($cs_for_dummies3);
   }
 

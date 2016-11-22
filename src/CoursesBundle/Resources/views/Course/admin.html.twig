@@ -1,26 +1,23 @@
 <div id="course_actions">
-    <h3>Admin</h3>
-    <table class= 'table'>
+    <center><h3>Admin</h3>
+    <table class= 'table table-bordered'>
         <tr>
             <td><a href="{{ path('course_edit', { 'token': course.token }) }}">Редагувати</a></td>
             <td><a href="{{ path('course_edit', { 'token': course.token }) }}">Оновити</a></td>
         </tr>
-        <form action="{{ path('course_publish', { 'token': course.token }) }}" method="post">
-            {{ form_widget(publish_form) }}
-            <button type="submit">Publish</button>
-        </form>
-        <td>
-            <form action="{{ path('course_delete', { 'token': course.token }) }}" method="post">
-                {{ form_widget(delete_form) }}
-                <button type="submit" onclick="if(!confirm('Ви дійсно бажаєте завершити курс? Переконайтеся що він нікому не потрібен і час уже вичерпано')) { return false; }">Видалити</button>
+        <tr>
+        <h3><form action="{{ path('course_publish', { 'token': course.token }) }}" method="post">
+                {{ form_widget(publish_form) }}
+                <button type="submit">Розпочати курс - розповсюдити - надати доступ</button>
             </form>
-        </td>
+        </h3>
+        </tr>
         
             <td {% if course.expiresSoon %} class="expires_soon" {% endif %}>
                 {% if course.isExpired %}
                     Час вийшов. Курс закінчився
                 {% else %}
-                    Курс розраховано ще на <strong>{{ course.getDaysBeforeExpires }}</strong> дні(в)
+                    Курс буде завершено через <strong>{{ course.getDaysBeforeExpires }}</strong> дні(в)
                 {% endif %}
  
                 
@@ -31,6 +28,13 @@
             <td>
                 [Зберегти собі <a href="{{ url('course_preview', { 'token': course.token, 'name': course.name, 'category': course.categoryslug }) }}"> цей URL</a> для керування цим курсом у майбутньому.]
             </td>
+            <td>
+            <h2><form action="{{ path('course_delete', { 'token': course.token }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                <button type="submit" onclick="if(!confirm('Ви дійсно бажаєте завершити курс? Переконайтеся що він нікому не потрібен і час уже вичерпано')) { return false; }">Видалити</button>
+        </form></h2>
+        </td>
         
     </table>
+
 </div>

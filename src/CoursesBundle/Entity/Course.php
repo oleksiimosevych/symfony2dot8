@@ -501,7 +501,7 @@ class Course
     public function removeUpload()
     {
         // Add your code here
-        if(file_exists($file)) {
+        if(file_exists($this->file)) {
             if ($file = $this->getAbsolutePath()) {
                 unlink($file);
             }
