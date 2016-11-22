@@ -50,21 +50,28 @@ class CourseController extends Controller
     public function newAction(Request $request)
     {
         $course = new Course();
-        $form = $this->createForm('CoursesBundle\Form\CourseType', $course);
-        $form->handleRequest($request);
+        $form = $this->createForm(new CourseType, $course);//new
+        //$form->handleRequest($request);
+        $form->bind($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if (/*$form->isSubmitted() && */$form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($course);
             $em->flush();
 
-            return $this->redirectToRoute('course_show', array('id' => $course->getId()));
+            //return $this->redirectToRoute('course_show', array('id' => $course->getId()));
+            return $this->redirect($this->generateUrl('course_show', array(
+            'name' => $course->getNameSlug(),
+            'price' => $course->getPriceSlug(),
+            'category' => $course->getCategorySlug(),
+            'id' => $course->getId()
+        )));
         }
 
         return $this->render('course/new.html.twig', array(
             'course' => $course,
             'form' => $form->createView(),
-        ));
+        ));//changes in this block 22 11 16 13 57
     }
 
     /**
