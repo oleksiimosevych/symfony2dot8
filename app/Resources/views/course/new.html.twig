@@ -1,16 +1,79 @@
+{% extends 'base.html.twig' %}
 
-<link rel="stylesheet" href="{{ asset('bundles/courses/css/main.css') }}" type="text/css" media="all" />
-{% block body %}
-<center>    <h1>Створити новий курс</h1>
+{% form_theme form _self %}
+ 
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+        <ul class="error_list">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Створити" />
+{% block stylesheets %}
+    {{ parent() }}
+   <link rel="stylesheet" href="{{ asset('bundles/courses/css/main.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block body%}
+<h1>Ви бажаєте додати новий курс</h1>
+    <form action="{{ path('course_new') }}" method="post" {{ form_enctype(form) }}>
+        <table id="course_form" class="table">
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Preview your Course" />
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr>
+                    <th>{{ form_label(form.category) }}</th>
+                    <td>
+                        {{ form_errors(form.category) }}
+                        {{ form_widget(form.category) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.type) }}</th>
+                    <td>
+                        {{ form_errors(form.type) }}
+                        {{ form_widget(form.type) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.file) }}</th>
+                    <td>
+                        {{ form_errors(form.file) }}
+                        {{ form_widget(form.file) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.contents) }}</th>
+                    <td>
+                        {{ form_errors(form.contents) }}
+                        {{ form_widget(form.contents) }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ form_label(form.token) }}</th>
+                    <td>
+                        {{ form_errors(form.token) }}
+                        {{ form_widget(form.token) }}
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
     {{ form_end(form) }}
+   	
 
-    <ul>
         <h3>
             <a href="{{ path('course_index') }}">Повернутися на головну</a>
         </h3>
-    </ul>
 {% endblock %}
+

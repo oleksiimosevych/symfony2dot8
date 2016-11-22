@@ -9,6 +9,8 @@ CoursesBundleEntityCourse:
             - NotBlank: ~
         created_at:
             - NotBlank: ~
+        updated_at:
+            - NotBlank: ~    
         token:
             - NotBlank: ~
         # url:
