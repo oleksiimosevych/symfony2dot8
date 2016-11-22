@@ -1,3 +1,6 @@
+{% block stylesheets %}
+      <link rel="stylesheet" href="{{ asset('bundles/courses/css/main.css') }}" type="text/css" media="all" />
+    {% endblock %}
         <table class="table table-bordered coursos">
           {% for course in category.activecoursos %}
             <tr class="{{ cycle(['even', 'odd'], loop.index) }} table table-bordered"></tr>

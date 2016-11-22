@@ -4,7 +4,7 @@
 div.full_course{
 	width: 500px;
     margin-left: 470px;
-    background-color: #7DE;
+    background-color: white;
     padding: 20px;	border-radius: 15px;
 }
 .headerdiv{
@@ -16,7 +16,7 @@ div.full_course{
 	border-radius: 15px;}
 body{height: 1024px;
 width:100%;
-background-color: silver;
+background-color: white;
 text-decoration: none !important;}
 	border-radius: 15px;
 .a{text-decoration: none;}
