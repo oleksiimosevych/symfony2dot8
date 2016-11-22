@@ -20,7 +20,7 @@ class CourseType extends AbstractType
         $builder
             //->add('logo', null, array('label' => 'Course logo'))
             //->add('type', null, array('label' => 'Тип курсу'))
-            ->add('logo', null, array('label' => 'Логотип курсу'))
+            //->add('logo', null, array('label' => 'Логотип курсу')) replace with FILE
             ->add('token', null, array('label' => 'Ключ курсу'))
             ->add('name', null, array('label' => 'Назва курсу'))
             ->add('contents', null, array('label' => 'Опис  курсу'))
@@ -28,7 +28,7 @@ class CourseType extends AbstractType
             ->add('created_at', null, array('label' => 'Дата створення курсу(по-замовчуванню - поточна дата)'))
             ->add('updated_at', null, array('label' => 'Дата оновлення курсу'))
             ->add('category', null, array('label' => 'Категорія курсу'))
-            ->add('file', 'file', array('label' => 'Course logo', 'required' => false))
+            ->add('file', 'file', array('label' => 'Логотип курсу', 'required' => false))
             ->add('type', 'choice', array('choices' => Course::getTypes(), 'expanded' => true))
         ;
     }

@@ -14,7 +14,7 @@ CoursesBundleEntityCourse:
         # url:
         #     - Url: ~
         file:
-            - Image: ~
+            - Image: ~ #here we are
         type:
             - NotBlank: ~
             - Choice: { callback: getTypeValues }

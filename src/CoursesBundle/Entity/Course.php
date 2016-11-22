@@ -349,7 +349,7 @@ class Course
         return $this->expires_at;
     }
 
-    public $file;
+    public $file;//we have
     /**
      * @var string
      */
@@ -444,5 +444,67 @@ class Course
     {
         return array_keys(self::getTypes());
     }
+    //PROTECTED
+    protected function getUploadDir()
+    {
+        return 'uploads/coursos';//jobs
+    }
+ 
+    protected function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+ 
+    public function getWebPath()
+    {
+        return null === $this->logo ? null : $this->getUploadDir().'/'.$this->logo;
+    }
+ 
+    public function getAbsolutePath()
+    {
+        return null === $this->logo ? null : $this->getUploadRootDir().'/'.$this->logo;
+    }
+    //**protected
 
+    /**
+     * @ORM\PrePersist
+     */
+    public function preUpload()
+    {
+        // Add your code here
+        if (null !== $this->file) {
+             $this->logo = uniqid().'.'.$this->file->guessExtension();
+         }
+    }
+
+    /**
+     * @ORM\PostPersist
+     */
+    public function upload()
+    {
+        // Add your code here
+        if (null === $this->file) {
+            return;
+        }
+ 
+        // If there is an error when moving the file, an exception will
+        // be automatically thrown by move(). This will properly prevent
+        // the entity from being persisted to the database on error
+        $this->file->move($this->getUploadRootDir(), $this->logo);
+ 
+        unset($this->file);
+    }
+
+    /**
+     * @ORM\PostRemove
+     */
+    public function removeUpload()
+    {
+        // Add your code here
+        if(file_exists($file)) {
+            if ($file = $this->getAbsolutePath()) {
+                unlink($file);
+            }
+        }    
+    }
 }

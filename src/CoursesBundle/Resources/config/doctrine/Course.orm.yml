@@ -51,5 +51,10 @@ CoursesBundle\Entity\Course:
       targetEntity: AutorCourse #names of entitiies
       mappedBy: course #the name of the entity who has many things? 
   lifecycleCallbacks:
-    prePersist: [ setCreatedAtValue , setExpiresAtValue]
-    preUpdate: [ setUpdatedAtValue ]
+    #added preUpload
+    prePersist: [ preUpload, setCreatedAtValue , setExpiresAtValue]
+    preUpdate: [ preUpload, setUpdatedAtValue ]
+    #added here
+    postPersist: [ upload ]
+    postUpdate: [ upload ]
+    postRemove: [ removeUpload ]
