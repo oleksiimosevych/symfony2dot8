@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class CourseRepository extends EntityRepository
 {
-	public function getActiveCoursos($category_id = null, $max=null)
+	public function getActiveCoursos($category_id = null, $max=null, $offset=null)
   {
     $qb = $this->createQueryBuilder('j')
       ->where('j.expires_at > :date')
@@ -22,6 +22,9 @@ class CourseRepository extends EntityRepository
 	  {
 	    $qb->setMaxResults($max);
 	  }
+  if($offset){
+    $qb->setFirstResult($offset); 
+  }
     if($category_id)
     {
       $qb->andWhere('j.category = :category_id')

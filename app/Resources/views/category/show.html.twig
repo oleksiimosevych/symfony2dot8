@@ -11,6 +11,46 @@
 
 
 
+   {% if last_page > 1 %}
+        <div class="pagination">
+            <h3>Перейти на сторінку № <a href="{{ path('category_show', { 'slug': category.slug, 'page': 1 }) }}">
+                
+            </a>
+ 
+            <a href="{{ path('category_show', { 'slug': category.slug, 'page': previous_page }) }}">
+                
+            </a>
+ 
+            {% for page in 1..last_page %}
+                {% if page == current_page %}
+                    {{ page }}
+                {% else %}
+                    <a href="{{ path('category_show', { 'slug': category.slug, 'page': page }) }}">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+ 
+            <a href="{{ path('category_show', { 'slug': category.slug, 'page': next_page }) }}">
+                
+            </a>
+ 
+            <a href="{{ path('category_show', { 'slug': category.slug, 'page': last_page }) }}">
+                
+            </a></h3>
+        </div>
+    {% endif %}
+ 
+    <div class="pagination_desc">
+        <p> Загальна кількість курсів у категорії {{category.name}}: <strong>{{ total_coursos }}</strong>
+ 
+        {% if last_page > 1 %}
+            Сторінка <strong>{{ current_page }} з {{ last_page }}</strong></p>
+        {% endif %}
+    </div>
+
+
+
+
+
 
     <button>
         <a href="{{ path('course_index') }}">Повернутися</a>

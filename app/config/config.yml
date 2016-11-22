@@ -11,6 +11,7 @@ parameters:
     locale: en
     #added here max coursOs
     max_coursos_on_homepage: 10
+    max_coursos_on_category: 20
 
 framework:
     #esi:             ~

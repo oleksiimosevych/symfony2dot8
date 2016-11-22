@@ -10,7 +10,7 @@ courses_homepage:
 category_categ:
     # ..path:     /categ
     resource: "@CoursesBundle/Resources/config/routing/category.yml"
-    prefix:   /category/{slug}
+    prefix:   /category/{slug}/{page}
     # pattern:  /category/{slug}
     # defaults: { _controller: CoursesBundle:Category:show }
 #src/bun/res/conf/routing.yml
