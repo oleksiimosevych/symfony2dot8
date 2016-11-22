@@ -1,35 +1,34 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <link rel="stylesheet" href="{{ asset('bundles/courses/css/main.css') }}" type="text/css" media="all" />
-    <h1>Course</h1>
-    <style type="text/css">
-        
-    </style>
-    <center><table id='courses_table'>
-        <tbody>
-            <tr>
-                <th><a>Id</a></th>
-                <td>{{ category.id }}</td>
+
+    <div class="category"><h1>Категорія №{{category.id}} : {{ category.name }}</h1>
+    <p>Категорію було створено <b>{% if category.createdat %}{{ category.createdat|date('Y-m-d H:i:s') }}{% endif %}</b>
+    {% if category.updatedat %} і востаннє оновлено <b> {{ category.updatedat|date('Y-m-d H:i:s') }}{% endif %}</b></p>
+    </div>
+<a href="{{ path('course_index') }}" class ="odd table table-bordered"><------Повернутися</a>
+    <table class="coursos table">
+        {% for entity in category.activecoursos %}
+            <tr class="{{ cycle(['even', 'odd'], loop.index) }} odd table table-bordered">
+                <td class="cname">Курс <b>"{{entity.name}}"</b></td>
+                <td class="cprice">$"{{entity.price}}"</td>
+                
+                <td class="cprice">
+                    <a href="{{ path('course_show', { 'id': entity.id, 'name': entity.nameslug, 'price': entity.priceslug, 'category': entity.categoryslug }) }}">Попередній перегляд</a>
+                        
+                    </a>
+                </td>
+                
             </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ category.name }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{% if category.createdat %}{{ category.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updated_at</th>
-                <td>{% if category.updatedat %}{{ category.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
+        {% endfor %}
     </table>
 
-    <ul>
-        <button>
-            <a href="{{ path('course_index') }}">Повернутися</a>
-        </button>
+
+
+
+    <button>
+        <a href="{{ path('course_index') }}">Повернутися</a>
+    </button>
 
     </ul>
 {% endblock %}

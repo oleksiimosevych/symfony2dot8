@@ -16,7 +16,7 @@ class CategoryController extends Controller
 {
  	public function showAction($slug)
 	{
-	    $em = $this->getDoctrine()->getEntityManager();
+	    $em = $this->getDoctrine()->getManager();
 	 
 	    $category = $em->getRepository('CoursesBundle:Category')->findOneBySlug($slug);
 	 
