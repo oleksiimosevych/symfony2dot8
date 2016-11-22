@@ -3,3 +3,11 @@ CoursesBundleEntityCourse:
         name:
             - NotBlank: ~
             # - Email: ~
+        contents:
+            - NotBlank: ~
+        price:
+            - NotBlank: ~
+        created_at:
+            - NotBlank: ~
+        # url:
+        #     - Url: ~

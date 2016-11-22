@@ -8,10 +8,6 @@ CoursesBundle\Entity\Course:
       type: integer
       generator: { strategy: AUTO } #autoincrement
   fields:
-    type:
-      type: string
-      length: 255
-      nullable: true
     name:
       type: string
       length: 255

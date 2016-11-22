@@ -17,13 +17,14 @@ class CourseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('contents')
-            ->add('price')
-            ->add('created_at', 'datetime')
-            ->add('updated_at', 'datetime')
-            ->add('category')
-            ->add('type', 'choice', array('choices' => Course::getTypes(), 'expanded' => true))
+            //->add('logo', null, array('label' => 'Course logo'))
+            ->add('name', null, array('label' => 'Назва курсу'))
+            ->add('contents', null, array('label' => 'Опис  курсу'))
+            ->add('price', null, array('label' => 'Ціна  курсу'))
+            ->add('created_at', null, array('label' => 'Дата створення курсу(по-замовчуванню - поточна дата)'))
+            ->add('updated_at', null, array('label' => 'Дата оновлення курсу'))
+            ->add('category', null, array('label' => 'Категорія курсу'))
+            //->add('type', 'choice', array('choices' => Course::getTypes(), 'expanded' => true))
         ;
     }
     
