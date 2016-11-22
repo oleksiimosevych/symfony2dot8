@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use CoursesBundle\Entity\Category;
 
-use CoursesBundle\Form\CategoryType;
+// use CoursesBundle\Form\CategoryType;
 /**
 * Category controller.
 *
@@ -26,9 +26,9 @@ class CategoryController extends Controller
 	 
 	    $category->setActiveCoursos($em->getRepository('CoursesBundle:Course')->getActiveCoursos($category->getId()));
 	 
-	    return $this->render('category/show.html.twig', array(
-	        'category' => $category,
-	    ));
+	    return $this->render('category/show.html.twig', array('category' => $category,));//там має бути кома походу . і це пов'язано з templates
 	}
 
 }
+
+?>

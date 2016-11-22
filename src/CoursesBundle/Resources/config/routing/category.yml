@@ -1,4 +1,4 @@
 category_show:
-    path:     /category{slug}
+    path:     /
     defaults: { _controller: "CoursesBundle:Category:show" }
     methods:  GET

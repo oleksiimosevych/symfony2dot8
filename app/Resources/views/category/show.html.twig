@@ -30,13 +30,6 @@
         <button>
             <a href="{{ path('course_index') }}">Повернутися</a>
         </button>
-        <button>
-            <a href="{{ path('category_edit', { 'id': course.id }) }}">Edit</a>
-        </button>
-        <button>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Видалити">
-            {{ form_end(delete_form) }}
-        </button>
+
     </ul>
 {% endblock %}
