@@ -8,6 +8,21 @@ CoursesBundle\Entity\Course:
       type: integer
       generator: { strategy: AUTO } #autoincrement
   fields:
+    logo:
+      type: string
+      length: 255
+      nullable: true
+    token:
+      type: string
+      length: 255
+      unique: true
+    type:
+      type: string
+      length: 255
+      nullable: true
+    is_activated:
+      type: boolean
+      nullable: true
     name:
       type: string
       length: 255
@@ -39,5 +54,10 @@ CoursesBundle\Entity\Course:
       targetEntity: AutorCourse #names of entitiies
       mappedBy: course #the name of the entity who has many things? 
   lifecycleCallbacks:
-    prePersist: [ setCreatedAtValue , setExpiresAtValue]
-    preUpdate: [ setUpdatedAtValue ]
+    #added preUpload
+    prePersist: [ setTokenValue, preUpload, setCreatedAtValue , setExpiresAtValue]
+    preUpdate: [ preUpload, setUpdatedAtValue ]
+    #added here
+    postPersist: [ upload ]
+    postUpdate: [ upload ]
+    postRemove: [ removeUpload ]

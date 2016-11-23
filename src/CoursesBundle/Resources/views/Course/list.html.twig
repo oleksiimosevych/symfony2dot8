@@ -7,8 +7,8 @@
               <td class="cname">Lets Learn <b>{{course.name}}</b></td>
               <td class="cprice">Купити негайно за ${{course.price}}</td>
               <td class="cedit">
-                <a href="{{ path('course_show', { 'id': course.id, 'name': course.nameslug, 'price': course.priceslug, 'category': course.categoryslug }) }}">Попередній перегляд</a>
-                    <!--<a href="{{ path('course_edit', { 'id': course.id }) }}">Редагувати</a>-->
+                <a href="{{ path('course_show', { 'id': course.id, 'name': course.nameslug, 'category': course.categoryslug }) }}">Попередній перегляд</a>
+                    <a href="{{ path('course_edit', { 'token': course.token }) }}">Редагувати</a>
                     <br>
               </td>
               

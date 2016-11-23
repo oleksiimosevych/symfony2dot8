@@ -1,0 +1,18 @@
+CoursesBundleEntityCourse:
+    properties:
+        name:
+            - NotBlank: ~
+            # - Email: ~
+        contents:
+            - NotBlank: ~
+        price:
+            - NotBlank: ~
+        created_at:
+            - NotBlank: ~
+        updated_at:
+            - NotBlank: ~    
+        file:
+            - Image: ~ #here we are
+        type:
+            - NotBlank: ~
+            - Choice: { callback: getTypeValues }
